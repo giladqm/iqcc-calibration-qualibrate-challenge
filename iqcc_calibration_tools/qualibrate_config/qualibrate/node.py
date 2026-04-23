@@ -295,35 +295,6 @@ class QualibrationNode(QualibrationNodeBase, Generic[ParametersType, MachineType
         
         # Add the subtitle to the figure
         fig.suptitle(combined_text, fontsize=10, y=0.98)
-        fig.tight_layout(rect=[0, 0, 1, 0.97])  # Adjust layout to prevent overlap with less spacing
-        
-        return node_info_text
+        fig.tight_layout(rect=[0, 0, 1, 0.97])
 
-    def get_node_info_text(self, additional_info=None):
-        """
-        Get the node information text without adding it to a figure.
-        
-        Args:
-            additional_info: Optional string with additional information to include
-            
-        Returns:
-            str: The formatted node information text
-        """
-        # Build the base subtitle
-        subtitle_parts = [f"{self.date_time} GMT+3 #{self.node_id}"]
-        
-        # Add multiplexed info if the parameter exists
-        if hasattr(self.parameters, 'multiplexed'):
-            subtitle_parts.append(f"multiplexed = {self.parameters.multiplexed}")
-        
-        # Add reset type info if the parameter exists
-        param_name = 'reset_type'
-        if hasattr(self.parameters, param_name):
-            subtitle_parts.append(f"reset type = {getattr(self.parameters, param_name)}")
-        
-        # Add any additional info
-        if additional_info:
-            subtitle_parts.append(additional_info)
-        
-        # Join all parts with newlines
-        return "\n".join(subtitle_parts)
+        return node_info_text
