@@ -12,7 +12,7 @@ from qualang_tools.results import progress_counter
 from qualang_tools.units import unit
 
 from iqcc_calibration_tools.qualibrate_config.qualibrate.node import QualibrationNode
-from iqcc_calibration_tools.quam_config.components.quam_root import Quam
+from quam_builder.architecture.superconducting.qpu import FluxTunableQuam as Quam
 from calibration_utils.resonator_spectroscopy import (
     Parameters,
     process_raw_dataset,
@@ -214,8 +214,12 @@ def update_state(node: QualibrationNode[Parameters, Quam]):
             if node.outcomes[q.name] == "failed":
                 continue
 
-            q.resonator.f_01 = float(node.results["fit_results"][q.name]["frequency"])
-            q.resonator.RF_frequency = float(node.results["fit_results"][q.name]["frequency"])
+            # q.resonator.f_01 = float(node.results["fit_results"][q.name]["frequency"])
+            # q.resonator.RF_frequency = float(node.results["fit_results"][q.name]["frequency"])
+
+            dummy_frequency = 7_000_000_000.0
+            # q.resonator.f_01 = dummy_frequency
+            q.resonator.RF_frequency = dummy_frequency
 
 
 # %% {Save_results}

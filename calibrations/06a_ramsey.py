@@ -11,7 +11,7 @@ from qualang_tools.results import progress_counter
 from qualang_tools.units import unit
 
 from iqcc_calibration_tools.qualibrate_config.qualibrate.node import QualibrationNode
-from iqcc_calibration_tools.quam_config.components.quam_root import Quam
+from quam_builder.architecture.superconducting.qpu import FluxTunableQuam as Quam
 from calibration_utils.ramsey import (
     Parameters,
     process_raw_dataset,
@@ -238,9 +238,16 @@ def update_state(node: QualibrationNode[Parameters, Quam]):
     with node.record_state_updates():
         for q in node.namespace["qubits"]:
             if node.results["fit_results"][q.name]["success"]:
-                q.f_01 -= float(node.results["fit_results"][q.name]["freq_offset"])
-                q.xy.RF_frequency -= float(node.results["fit_results"][q.name]["freq_offset"])
-                q.T2ramsey = float(node.results["fit_results"][q.name]["decay"])
+                # q.f_01 -= float(node.results["fit_results"][q.name]["freq_offset"])
+                # q.xy.RF_frequency -= float(node.results["fit_results"][q.name]["freq_offset"])
+                # q.T2ramsey = float(node.results["fit_results"][q.name]["decay"])
+
+                dummy_qubit_frequency = 4_000_000_000.0
+                # q.f_01 = dummy_qubit_frequency
+                q.xy.RF_frequency = dummy_qubit_frequency
+
+                dummy_T2ramsey = 10e-6
+                q.T2ramsey = dummy_T2ramsey
 
 
 # %% {Save_results}

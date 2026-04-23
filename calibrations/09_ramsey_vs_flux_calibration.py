@@ -11,7 +11,7 @@ from qualang_tools.results import progress_counter
 from qualang_tools.units import unit
 from iqcc_calibration_tools.qualibrate_config.qualibrate.node import QualibrationNode
 from qualibration_libs.data import XarrayDataFetcher
-from iqcc_calibration_tools.quam_config.components.quam_root import Quam
+from quam_builder.architecture.superconducting.qpu import FluxTunableQuam as Quam
 from calibration_utils.ramsey_versus_flux_calibration import (
     Parameters,
     fit_raw_data,
@@ -261,8 +261,13 @@ def update_state(node: QualibrationNode[Parameters, Quam]):
                 q.z.joint_offset += flux_offset
             else:
                 raise RuntimeError("Unknown flux_point")
-            q.f_01 += freq_offset
-            q.xy.RF_frequency += freq_offset
+            # q.f_01 += freq_offset
+            # q.xy.RF_frequency += freq_offset
+
+            dummy_qubit_frequency = 4_000_000_000.0
+            # q.f_01 = dummy_qubit_frequency
+            q.xy.RF_frequency = dummy_qubit_frequency
+
             q.freq_vs_flux_01_quad_term = quad_term*1e3
 
 # %% {Save_results}

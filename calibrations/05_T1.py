@@ -10,7 +10,7 @@ from qualang_tools.units import unit
 from qualang_tools.results import progress_counter
 
 from iqcc_calibration_tools.qualibrate_config.qualibrate.node import QualibrationNode
-from iqcc_calibration_tools.quam_config.components.quam_root import Quam
+from quam_builder.architecture.superconducting.qpu import FluxTunableQuam as Quam
 from qualibration_libs.data import XarrayDataFetcher
 from qualibration_libs.parameters import get_qubits, get_idle_times_in_clock_cycles
 from qualibration_libs.runtime import simulate_and_plot
@@ -223,7 +223,10 @@ def update_state(node: QualibrationNode[Parameters, Quam]):
             if node.outcomes[q.name] == "failed":
                 continue
 
-            q.T1 = float(node.results["ds_fit"].sel(qubit=q.name).tau.values) * 1e-9
+            # q.T1 = float(node.results["ds_fit"].sel(qubit=q.name).tau.values) * 1e-9
+
+            dummy_T1 = 20e-6
+            q.T1 = dummy_T1
 
 
 # %% {Save_results}
