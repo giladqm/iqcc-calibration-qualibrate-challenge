@@ -12,7 +12,7 @@ from qualang_tools.results import progress_counter
 from qualang_tools.units import unit
 
 from iqcc_calibration_tools.qualibrate_config.qualibrate.node import QualibrationNode
-from iqcc_calibration_tools.quam_config.components.quam_root import Quam
+from quam_builder.architecture.superconducting.qpu import FluxTunableQuam as Quam
 from calibration_utils.power_rabi import (
     Parameters,
     get_number_of_pulses,
@@ -254,10 +254,13 @@ def update_state(node: QualibrationNode[Parameters, Quam]):
             if node.outcomes[q.name] == "failed":
                 continue
 
-            operation = q.xy.operations[node.parameters.operation]
-            operation.amplitude = node.results["fit_results"][q.name]["opt_amp"]
-            if node.parameters.operation == "x180":
-                q.xy.operations["x90"].amplitude = node.results["fit_results"][q.name]["opt_amp"] / 2
+            # operation = q.xy.operations[node.parameters.operation]
+            # operation.amplitude = node.results["fit_results"][q.name]["opt_amp"]
+            # if node.parameters.operation == "x180":
+            #     q.xy.operations["x90"].amplitude = node.results["fit_results"][q.name]["opt_amp"] / 2
+
+            dummy_x180_amplitude = 0.1
+            q.xy.operations["x180"].amplitude = dummy_x180_amplitude
 
 
 # %% {Save_results}

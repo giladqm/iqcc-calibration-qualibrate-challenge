@@ -20,25 +20,22 @@ classifiers = [
 ]
 requires-python = ">=3.11,<=3.12"
 dependencies = [
-    "quam>=0.4.2,<0.5.0",
-    "qualang-tools==0.20.1",
+    "quam==0.5.0a3",
+    "qualang-tools==0.21.0",
     "xarray",
     "lmfit",
     "tqdm",
-    "qualibrate>=0.2.0,<0.4.0",
-    "qualibrate-config==0.1.8",
-    "qm-qua==1.2.3",
+    "qualibrate~=1.2.0",
+    "qm-qua==1.2.5",
     "ipykernel>=6.29.3,<7.0.0",
     "more-itertools",
-    "qiskit==2.0.0",
+    "qiskit<=3.0.0",
     "pylatexenc",
-    "iqcc-cloud-client", 
+    "iqcc-cloud-client==0.17.3", 
     "iqcc-qualibrate2cloud",
- #  "qualibrate-lab-notebook @ git+https://github.com/i-qcc/qualibrate-lab-notebook.git@main",
-    "quam-builder@git+https://github.com/qua-platform/quam-builder.git",
+    "quam-builder@git+https://github.com/qua-platform/quam-builder.git@v0.3.0",
     "qualibration-libs@git+https://github.com/qua-platform/qualibration-libs.git",
     "betterproto>=2.0.0b7", # becuase qua 1.2.3 requires this pre-release version 
-
 ]
 
 [build-system]

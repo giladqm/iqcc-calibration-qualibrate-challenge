@@ -12,7 +12,7 @@ from qualang_tools.results import progress_counter
 from qualang_tools.units import unit
 
 from iqcc_calibration_tools.qualibrate_config.qualibrate.node import QualibrationNode
-from iqcc_calibration_tools.quam_config.components.quam_root import Quam
+from quam_builder.architecture.superconducting.qpu import FluxTunableQuam as Quam
 from calibration_utils.qubit_spectroscopy import (
     Parameters,
     process_raw_dataset,
@@ -236,8 +236,12 @@ def update_state(node: QualibrationNode[Parameters, Quam]):
                 continue
 
             # Update the readout frequency for the given flux point
-            q.f_01 = node.results["fit_results"][q.name]["frequency"]
-            q.xy.RF_frequency = node.results["fit_results"][q.name]["frequency"]
+            # q.f_01 = node.results["fit_results"][q.name]["frequency"]
+            # q.xy.RF_frequency = node.results["fit_results"][q.name]["frequency"]
+
+            dummy_qubit_frequency = 4_000_000_000.0
+            # q.f_01 = dummy_qubit_frequency
+            q.xy.RF_frequency = dummy_qubit_frequency
 
             fit_result = node.results["fit_results"][q.name]
             # Update the integration weight angle
@@ -246,7 +250,9 @@ def update_state(node: QualibrationNode[Parameters, Quam]):
                 # Update the saturation amplitude
                 q.xy.operations["saturation"].amplitude = fit_result["saturation_amp"]
                 # Update the x180 and x90 amplitudes
-                q.xy.operations["x180"].amplitude = fit_result["x180_amp"]
+                # q.xy.operations["x180"].amplitude = fit_result["x180_amp"]
+                dummy_x180_amplitude = 0.1
+                q.xy.operations["x180"].amplitude = dummy_x180_amplitude
                 q.xy.operations["x90"].amplitude = fit_result["x180_amp"] / 2
 
 
